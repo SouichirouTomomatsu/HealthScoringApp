@@ -1,0 +1,38 @@
+<ons-page>
+    <div ng-controller="gameCtrl as game">
+		<ons-toolbar>
+			<div class="left">
+				<ons-toolbar-button>
+					<ons-icon icon="ion-close-round" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
+				</ons-toolbar-button>
+			</div>
+			<div class="center">
+				Quiz App
+			</div>
+			<div class="right">
+				1/10問目
+			</div>
+		</ons-toolbar>
+		<div class="question">
+			<p>
+				ここに問題文を表示します。ここに問題文を表示します。ここに問題文を表示します。ここに問題文を表示します。
+			</p>
+		</div>
+		<div class="choices">
+			<ons-row>
+				<ons-col width="50%" align="center">
+					<button class="button button--large--cta">解答A</button>
+				</ons-col>
+				<ons-col width="50%" align="center">
+					<button class="button button--large--cta">解答B</button>
+				</ons-col>
+				<ons-col width="50%" align="center">
+					<button class="button button--large--cta">解答C</button>
+				</ons-col>
+				<ons-col width="50%" align="center">
+					<button class="button button--large--cta">解答D</button>
+				</ons-col>
+			</ons-row>
+		</div>
+	</div>
+</ons-page>

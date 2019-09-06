@@ -1,21 +1,29 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app="myApp">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
   <script src="components/loader.js"></script>
+  <!-- AngularJS用 -->
+  <script src="lib/angular/angular.min.js"></script>
+  <!-- OnsenUIの最小限のJS？ -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <!-- Anqular×OnsenUI -->
+  <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+  <!-- SplitterJS(横メニューのやつ) -->
   <script src="js/splitter-side.js"></script>
+  <!-- ゲームアプリ用JS -->
+  <script src="js/app.js"></script>
 
-  <link rel="stylesheet" href="components/loader.css">
+  <!-- OnsenUI import -->
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="css/style.css">
 
   <script>
     // OnsenUI 読み込み
-    // ons.bootstrap();
     ons.ready(function() {
       console.log("Onsen UI is ready!");
     });
@@ -39,6 +47,9 @@
           <ons-list-item onclick="fn.load('scoring.html')" tappable>
             Scoring
           </ons-list-item>
+          <ons-list-item onclick="fn.load('conTest.html')" tappable>
+            ConcentrationTest
+          </ons-list-item>
           <ons-list-item onclick="fn.load('settings.html')" tappable>
             Settings
           </ons-list-item>
@@ -48,7 +59,8 @@
         </ons-list>
       </ons-page>
     </ons-splitter-side>
-    <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+    <!-- デフォルトページ指定 -->
+    <ons-splitter-content id="content" page="conTest.html"></ons-splitter-content>
   </ons-splitter>
 
   <!-- Mainメニュー -->
@@ -98,6 +110,32 @@
       健康に気をつけましょう！
     </p>
   </ons-page>
+  </ons-template>
+
+  <!-- 集中力計測画面 -->
+  <ons-template id="conTest.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          集中力測定ゲーム
+        </div>
+      </ons-toolbar>
+      <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+        集中力計測開始しまっせ！！
+      </p>
+      <ons-navigator var="myNavigator" page="top.html">
+      </ons-navigator>  
+      <!-- <div class="start-btn" ng-controller="gameCtrl as top">
+        <ons-button modifier="large" ng-click="top.gameStart()">
+          Game Start
+        </ons-button>
+      </div> -->
+    </ons-page>
   </ons-template>
   
   <!-- セッティング画面 -->
