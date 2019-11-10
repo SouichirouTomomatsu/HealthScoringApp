@@ -1,180 +1,232 @@
 <!DOCTYPE HTML>
 <html ng-app="myApp">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-  <script src="components/loader.js"></script>
-  <!-- AngularJS用 -->
-  <script src="lib/angular/angular.min.js"></script>
-  <!-- OnsenUIの最小限のJS？ -->
-  <script src="lib/onsenui/js/onsenui.min.js"></script>
-  <!-- Anqular×OnsenUI -->
-  <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
-  <!-- SplitterJS(横メニューのやつ) -->
-  <script src="js/splitter-side.js"></script>
-  <!-- ゲームアプリ用JS -->
-  <script src="js/app.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- ライブラリ呼び出し -->
+    <!-- コンポーネントローダー -->
+    <script src="components/loader.js"></script>
+    <!-- AngularJS用 -->
+    <script src="lib/angular/angular.min.js"></script>
+    <!-- OnsenUIの最小限のJS？ -->
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    <!-- Anqular×OnsenUI -->
+    <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+    <!-- SplitterJS(横メニューの機能) -->
+    <script src="js/splitter-side.js"></script>
+    <!-- ゲームアプリ用JS -->
+    <script src="js/app.js"></script>
+    <!-- IndexedDB -->
+    <script src="js/indexeddb.js"></script>
 
-  <!-- OnsenUI import -->
-  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
-  <link rel="stylesheet" href="components/loader.css">
-  <link rel="stylesheet" href="css/style.css">
+    <!-- OnsenUI import -->
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+    <link rel="stylesheet" href="components/loader.css">
 
-  <script>
-    // OnsenUI 読み込み
-    ons.ready(function() {
-      console.log("Onsen UI is ready!");
-    });
+    <!-- stylesheet 読み込み -->
+    <link rel="stylesheet" href="css/style.css">
 
-    if (ons.platform.isIPhoneX()) {
-      document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
-      document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
-    }
-  </script>
-</head>
-<body>
+    <script>
+      // OnsenUI 読み込み
+      ons.ready(function() {
+        console.log("Onsen UI is ready!");
+      });
 
-  <!-- SplitterMenu設定 -->
-  <ons-splitter>
-    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
-      <ons-page>
-        <ons-list>
-          <ons-list-item onclick="fn.load('home.html')" tappable>
-            Home
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('scoring.html')" tappable>
-            Scoring
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('conTest.html')" tappable>
-            ConcentrationTest
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('settings.html')" tappable>
-            Settings
-          </ons-list-item>
-          <ons-list-item onclick="fn.load('about.html')" tappable>
-            About
-          </ons-list-item>
-        </ons-list>
+      if (ons.platform.isIPhoneX()) {
+        document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+        document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+      }
+    </script>
+  </head>
+  <body>
+
+    <!-- SplitterMenu設定 -->
+    <ons-splitter>
+      <!-- メニュー設定 -->
+      <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+        <ons-page>
+          <ons-list>
+            <br>
+            <br>
+            <br>
+            <ons-list-item ></ons-list-item>
+            <ons-list-item onclick="fn.load('home.html')" tappable>
+              Home
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('InputData.html')" tappable>
+              InputData
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('scoring.html')" tappable>
+              Scoring
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('conTest.html')" tappable>
+              ConcentrationTest
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('settings.html')" tappable>
+              Settings
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('about.html')" tappable>
+              About
+            </ons-list-item>
+          </ons-list>
+        </ons-page>
+      </ons-splitter-side>
+      <!-- デフォルトページ指定 -->
+      <ons-splitter-content id="content" page="settings.html"></ons-splitter-content>
+    </ons-splitter>
+
+    <!-- Mainメニュー -->
+    <ons-template id="home.html">
+      <ons-page id="home">
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            Main
+          </div>
+        </ons-toolbar>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+          マスター、ようこそ！
+        </p>
       </ons-page>
-    </ons-splitter-side>
-    <!-- デフォルトページ指定 -->
-    <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
-  </ons-splitter>
+    </ons-template>
 
-  <!-- Mainメニュー -->
-  <ons-template id="home.html">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-          </ons-toolbar-button>
+    <!-- InputData画面 -->
+    <ons-template id="InputData.html">
+      <ons-page id="InputData">
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            InputData
+          </div>
+        </ons-toolbar>
+        <br>
+        <br>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+          日付：<input id="SelectDate" type="date" name="SelectDate" style="text-align:center;"><br>
+          <br>
+          睡眠時間：<input id="HealthNo1" type="text" ><br>
+          飲酒：    <input id="HealthNo2" type="text" ><br>
+          喫煙：    <input id="HealthNo3" type="text" ><br>
+          <!-- onClickイベントを追加 -->
+          <input type="submit" value="登録" onClick="return EntryDate();return EntryDate();">
+        </p>
+      </ons-page>
+    </ons-template>
+
+    <!-- スコアリング画面 -->
+    <ons-template id="scoring.html">
+      <ons-page id="scoring">
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            ScoringResult!
+          </div>
+        </ons-toolbar>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+            TODO : ここで健康スコアを算出する。<br>結果も表示する
+        </p>
+        <div style="text-align:center;"> 
+          <img src="img/Score_A.png">
         </div>
-        <div class="center">
-          Main
-        </div>
-      </ons-toolbar>
-      <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-        マスター、ようこそ！
-      </p>
-    </ons-page>
-  </ons-template>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #FF0000;">
+          マスター！
+          良スコアです。<br>
+        </P>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #000000;">
+          引き続き、集中力を保てるよう<br>
+          健康に気をつけましょう！
+        </p>
+      </ons-page>
+    </ons-template>
 
-  <!-- スコアリング画面 -->
-  <ons-template id="scoring.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        ScoringResult!
-      </div>
-    </ons-toolbar>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-        TODO : ここで健康スコアを算出する。<br>結果も表示する
-    </p>
-    <div style="text-align:center;"> 
-      <img src="img/Score_A.png">
-    </div>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #FF0000;">
-      マスター！
-      良いのスコアです。<br>
-    </P>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #000000;">
-      引き続き、集中力を保てるよう<br>
-      健康に気をつけましょう！
-    </p>
-  </ons-page>
-  </ons-template>
+    <!-- 集中力計測画面 -->
+    <ons-template id="conTest.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            集中力測定ゲーム
+          </div>
+        </ons-toolbar>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+          集中力計測開始しまっせ！！
+        </p>
+        <ons-navigator var="myNavigator" page="top.html">
+        </ons-navigator>  
+        <!-- <div class="start-btn" ng-controller="gameCtrl as top">
+          <ons-button modifier="large" ng-click="top.gameStart()">
+            Game Start
+          </ons-button>
+        </div> -->
+      </ons-page>
+    </ons-template>
+    
+    <!-- セッティング画面 -->
+    <ons-template id="settings.html">
+      <ons-page id="setting">
+        <!-- Toolbar -->
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            Settings
+          </div>
+        </ons-toolbar>
+        <br><br>
+        <!-- Main -->
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">          
+          <br>
+          TODO : ここに健康変数マスタを設定する項目を設ける
+          <br>
+          <br>
+          <input type="button" value="セット" onClick="Load()" >
+          <br>
+          <br>
+          <select id="HealthSetting" ,name="HealthMaster">
+          </select>    
+        </p> 
+      </ons-page>
+    </ons-template>
 
-  <!-- 集中力計測画面 -->
-  <ons-template id="conTest.html">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left">
-          <ons-toolbar-button onclick="fn.open()">
-            <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">
-          集中力測定ゲーム
-        </div>
-      </ons-toolbar>
-      <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-        集中力計測開始しまっせ！！
-      </p>
-      <ons-navigator var="myNavigator" page="top.html">
-      </ons-navigator>  
-      <!-- <div class="start-btn" ng-controller="gameCtrl as top">
-        <ons-button modifier="large" ng-click="top.gameStart()">
-          Game Start
-        </ons-button>
-      </div> -->
-    </ons-page>
-  </ons-template>
-  
-  <!-- セッティング画面 -->
-  <ons-template id="settings.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        Settings
-      </div>
-    </ons-toolbar>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-        TODO : ここに健康変数を設定する項目を設ける
-    </p> 
-  </ons-page>
-  </ons-template>
+    <!-- クレジット画面 -->
+    <ons-template id="about.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            About
+          </div>
+        </ons-toolbar>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+          TODO : ここはクレジットを予定
+        </p>
+      </ons-page>
+    </ons-template>
 
-  <!-- クレジット画面 -->
-  <ons-template id="about.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        About
-      </div>
-    </ons-toolbar>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-      TODO : ここはクレジットを予定
-    </p>
-  </ons-page>
-  </ons-template>
-
-</body>
+  </body>
 </html>
