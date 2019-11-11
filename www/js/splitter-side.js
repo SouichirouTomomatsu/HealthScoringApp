@@ -1,4 +1,4 @@
-// SplingMenuバーのメソッド
+// ナビゲーションメニュー（SplingMenuバー）のメソッド
 // 何をやってるのか。ようわからん
 window.fn = {};
 window.fn.open = function() {
@@ -14,26 +14,30 @@ window.fn.load = function(page) {
 };
 
 /**
- * メニュー遷移時のロードイベント
+ * ナビゲーションメニュー遷移時のロードイベント
  */
 document.addEventListener('init', function(event) {
+
   var page = event.target;
+ 
+  switch (page.id){
+    case 'InputData':
+      // InputDataがロードされた時に実行されるプログラム
+      // 本日日付を取得しカレンダーにセット
+      var date = new Date();
+      var yyyy = date.getFullYear();
+      var mm = ("0"+(date.getMonth()+1)).slice(-2);
+      var dd = ("0"+date.getDate()).slice(-2);
+      document.getElementById("SelectDate").value = yyyy+"-"+mm+"-"+dd;
+      break;
 
-  if (page.id === 'InputData') {
-    //InputDataがロードされた時に実行されるプログラム
-    var date = new Date();
+    case 'scoring':
+      // scoringがロードされた時に実行されるプログラム
+      alert("テスト");
+      break;
 
-    var yyyy = date.getFullYear();
-    var mm = ("0"+(date.getMonth()+1)).slice(-2);
-    var dd = ("0"+date.getDate()).slice(-2);
-
-    document.getElementById("SelectDate").value = yyyy+"-"+mm+"-"+dd;
-
-  } else if (page.id === 'scoring') {
-    //scoringがロードされた時に実行されるプログラム
-    alert("!!");
-  } else if (page.id === 'home') {
-    //scoringがロードされた時に実行されるプログラム
-    Load("");
+    case 'home':
+      // homeがロードされた時に実行されるプログラム    
+      break;
   }
 });

@@ -1,10 +1,10 @@
 /**
  * TODO:IndexedDB_Common.jsに後程命名する。
  */
-var hogehoge = 1;
+var hogehoge = '1.000.000';
 
 /**
- * DBの新規作成
+ * データベースの新規作成
  * dbName   :DBの名前
  * dbver    :DBのバージョンを指定
  */
@@ -24,13 +24,17 @@ var CreateDB = function(dbName, dbVer){
 }
 
 /**
- * 
+ * テーブルの新規作成
+ * dbName   :DBの名前
+ * dbver    :DBのバージョンを指定
+ * tableName:新規作成するテーブル名
+ * key      :主キーを指定
  */
 var CreateTable = function(dbName, dbVer, tableName, key){
   // 入力チェック
   if(tableName == ""){
-    alert('テーブルに空白文字は無効です');
-    return ;
+    alert('テーブル名に空白文字は無効です');
+    return -2;
   }
 	var dbRequest = indexedDB.open(dbName,dbVer);
   dbRequest.onupgradeneeded = function(event){
@@ -47,16 +51,37 @@ var CreateTable = function(dbName, dbVer, tableName, key){
     // DBVersionを更新
     dbversion = dbVer;
     db.close();
-    return 0;
   }
   dbRequest.onerror = function(event){
     alert('DBの接続に失敗しました。');
     return -1;
   }
+  // 正常終了
+  return 0;
 }
 
 /**
- * 
+ * テーブルの削除
+ * dbName   :DBの名前
+ */
+var DropDB = function(dbName){
+  var deleteReq = indexedDB.deleteDatabase(dbName);
+  deleteReq.onsuccess = function(event){
+    alert('DBの削除に成功しました。');
+    // 存在しないDB名を指定してもこっちが実行される
+  }
+  deleteReq.onerror = function(){
+    alert('DBの削除に失敗しました。');
+  }
+  // DBVersionをリセット
+  dbversion = 1;
+}
+
+/**
+ * レコードの挿入
+ * dbName   :DBの名前
+ * tableName:テーブル名
+ * date     :データを指定
  */
 var Insert = function(dbName, tableName, data){
 	// DBに接続
@@ -74,23 +99,10 @@ var Insert = function(dbName, tableName, data){
 	}
 	dbRequest.onerror = function(event){
     alert('DBの接続に失敗しました。');
+    return -1;
 	}
-}
-
-/**
- * 
- */
-var DropDB = function(dbName){
-  var deleteReq = indexedDB.deleteDatabase(dbName);
-  deleteReq.onsuccess = function(event){
-    alert('DBの削除に成功しました。');
-    // 存在しないDB名を指定してもこっちが実行される
-  }
-  deleteReq.onerror = function(){
-    alert('DBの削除に失敗しました。');
-  }
-  // DBVersionをリセット
-  dbversion = 1;
+  // 正常終了
+  return 0;  
 }
 
 /**
@@ -98,7 +110,7 @@ var DropDB = function(dbName){
  * 指定したキーに紐づくデータを取得します。
  * @param {string} dbName
  * @param {string} tabelName
- * @param {string} key
+ * @param {string} id
  */
 var getValue = function(dbName, tableName, id){
 	// DBに接続
@@ -111,7 +123,6 @@ var getValue = function(dbName, tableName, id){
     var store = transaction.objectStore(tableName);
     
     // データを取得
-    //( '00000' + id ).slice( -5 )は’00001’という数値で登録されているため桁数を揃えるために使う
     var result = store.get(1);
     result.onsuccess = function(event) {
       var record = event.target.result;
@@ -137,9 +148,9 @@ var getValue = function(dbName, tableName, id){
 /**
  * 指定したDBに接続して、データを取得します。
  * 指定したキーに紐づくデータを取得します。
- * @param {string} dbName
- * @param {string} tabelName
- * @param {string} key
+ * @param {string} dbName     :データベース名
+ * @param {string} tabelName  :テーブル名
+ * @param {string} dbver      :テーブルのバージョン
  */
 var getAllValue = function(dbName, tableName, dbver){
 	// DBに接続
@@ -186,7 +197,24 @@ var Load = function(){
   var tableName = "HealthMaster";
   var key = 'HealthNo';
 
-  // 健康変数マスタ・レコード
+  DebugAlert('TestTom');
+
+  // セッティング・既存のDBを削除（テスト）
+  DropDB(dbname);
+
+  // データベースの作成
+  if(CreateDB(dbname, dbversion)==-1){
+    alert("DBの作成に失敗しました!!");
+    return ;
+  };
+
+  // テーブルの作成
+  if(CreateTable(dbname, Number(dbversion) + 1, tableName, key)==-1){
+    alert("テーブルの作成に失敗しました!!");
+    return ;
+  };
+
+  // 健康変数マスタ・レコードの用意
   var HM_Rec1 = {
     HealthNo : 1,
     HealthName : '睡眠時間',
@@ -212,27 +240,12 @@ var Load = function(){
     ImpactDate : 0,
   };
 
-  // セッティング・既存のDBを削除（テスト）
-  DropDB(dbname);
-
-  // DBの作成
-  if(CreateDB(dbname, dbversion)==-1){
-    alert("MISS!!");
-    return ;
-  };
-
-  // テーブルの作成
-  if(CreateTable(dbname, Number(dbversion) + 1, tableName, key)==-1){
-    alert("MISS!!");
-    return ;
-  };
-
   // レコードの追加
   Insert(dbname, tableName, HM_Rec1);
   Insert(dbname, tableName, HM_Rec2);
   Insert(dbname, tableName, HM_Rec3);
 
-  // 暫定
+  // TODO:暫定・レコードから読み込んでマスタにセットするよう変更する
   var arrHelthMaster = [
     {HealthNo : 1, HealthName:'睡眠'},
     {HealthNo : 2, HealthName:'飲酒'},

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <!-- ライブラリ呼び出し -->
-    <!-- コンポーネントローダー -->
+    <!-- コンポーネントローダー (おそらくデフォルトで挿入されていたはず)-->
     <script src="components/loader.js"></script>
     <!-- AngularJS用 -->
     <script src="lib/angular/angular.min.js"></script>
@@ -13,7 +13,7 @@
     <script src="lib/onsenui/js/onsenui.min.js"></script>
     <!-- Anqular×OnsenUI -->
     <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
-    <!-- SplitterJS(横メニューの機能) -->
+    <!-- SplitterJS(ナビゲーションメニューの機能) -->
     <script src="js/splitter-side.js"></script>
     <!-- ゲームアプリ用JS -->
     <script src="js/app.js"></script>
@@ -126,6 +126,7 @@
     <!-- スコアリング画面 -->
     <ons-template id="scoring.html">
       <ons-page id="scoring">
+        <!-- Toolbar -->
         <ons-toolbar>
           <div class="left">
             <ons-toolbar-button onclick="fn.open()">
@@ -136,6 +137,7 @@
             ScoringResult!
           </div>
         </ons-toolbar>
+        <!-- Main -->        
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
             TODO : ここで健康スコアを算出する。<br>結果も表示する
         </p>
