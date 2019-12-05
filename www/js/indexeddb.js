@@ -1,39 +1,39 @@
 /**
  * TODO:IndexedDB_Common.jsに後程命名する。
  */
-var hogehoge = '1.000.000';
+var hogehoge = 'ver 1.000.000';
 
 /**
  * データベースの新規作成
- * dbName   :DBの名前
- * dbver    :DBのバージョンを指定
+ * @param {string} dbName     : 新規作成するデータベース名
+ * @param {string} dbver      : DBのバージョン
  */
 var CreateDB = function(dbName, dbVer){
 	// DBに接続
 	var dbRequest = indexedDB.open(dbName, dbVer);
   dbRequest.onsuccess = function(event){
-    alert('DBの作成に成功しました。');
+    DebugAlert('DBの作成に成功しました。');
     var db = event.target.result;
     db.close();
     return 0;
 	}
 	dbRequest.onerror = function(event){
-    alert('DBの接続に失敗しました。');
+    DebugAlert('DBの接続に失敗しました。');
     return -1;
 	}
 }
 
 /**
  * テーブルの新規作成
- * dbName   :DBの名前
- * dbver    :DBのバージョンを指定
- * tableName:新規作成するテーブル名
- * key      :主キーを指定
+ * @param {string} dbName     : データベース名
+ * @param {string} dbVer      : DBのバージョン
+ * @param {string} tableName  : 新規作成するテーブル名
+ * @param {string} key        : 主キーを指定
  */
 var CreateTable = function(dbName, dbVer, tableName, key){
   // 入力チェック
   if(tableName == ""){
-    alert('テーブル名に空白文字は無効です');
+    DebugAlert('テーブル名に空白文字は無効です');
     return -2;
   }
 	var dbRequest = indexedDB.open(dbName,dbVer);
@@ -43,7 +43,7 @@ var CreateTable = function(dbName, dbVer, tableName, key){
     if(tableName){
       // DBにテーブルを追加します。
       db.createObjectStore(tableName, {keyPath : key})
-      alert('DBにテーブルを追加しました。テーブル名 : ' + tableName + ' / keyPath : ' + key);
+      DebugAlert('DBにテーブルを追加しました。テーブル名 : ' + tableName + ' / keyPath : ' + key);
     }
 	}
   dbRequest.onsuccess = function(event){
@@ -53,7 +53,7 @@ var CreateTable = function(dbName, dbVer, tableName, key){
     db.close();
   }
   dbRequest.onerror = function(event){
-    alert('DBの接続に失敗しました。');
+    DebugAlert('DBの接続に失敗しました。');
     return -1;
   }
   // 正常終了
@@ -62,16 +62,16 @@ var CreateTable = function(dbName, dbVer, tableName, key){
 
 /**
  * テーブルの削除
- * dbName   :DBの名前
+ * @param {string} dbName     :DBの名前
  */
 var DropDB = function(dbName){
   var deleteReq = indexedDB.deleteDatabase(dbName);
   deleteReq.onsuccess = function(event){
-    alert('DBの削除に成功しました。');
+    DebugAlert('DBの削除に成功しました。');
     // 存在しないDB名を指定してもこっちが実行される
   }
   deleteReq.onerror = function(){
-    alert('DBの削除に失敗しました。');
+    DebugAlert('DBの削除に失敗しました。');
   }
   // DBVersionをリセット
   dbversion = 1;
@@ -79,9 +79,9 @@ var DropDB = function(dbName){
 
 /**
  * レコードの挿入
- * dbName   :DBの名前
- * tableName:テーブル名
- * date     :データを指定
+ * @param {string} dbName     : データベース名
+ * @param {string} tableName  : テーブル名
+ * @param {string} date       : 挿入するデータを指定
  */
 var Insert = function(dbName, tableName, data){
 	// DBに接続
@@ -94,11 +94,11 @@ var Insert = function(dbName, tableName, data){
 
     // テーブルにデータを追加
     var putRequest = table.put(data);
-    alert("データを挿入しました");
+    DebugAlert("データを挿入しました");
     db.close();
 	}
 	dbRequest.onerror = function(event){
-    alert('DBの接続に失敗しました。');
+    DebugAlert('DBの接続に失敗しました。');
     return -1;
 	}
   // 正常終了
@@ -133,7 +133,7 @@ var getValue = function(dbName, tableName, id){
           console.log("キー : " + key + ", 値 : " + record[abc]);
           str += record[abc] + "," ;
         });
-        alert(str);
+        DebugAlert(str);
         console.log("");
       }
     };
@@ -146,15 +146,12 @@ var getValue = function(dbName, tableName, id){
 }
 
 /**
- * 指定したDBに接続して、データを取得します。
- * 指定したキーに紐づくデータを取得します。
- * @param {string} dbName     :データベース名
- * @param {string} tabelName  :テーブル名
- * @param {string} dbver      :テーブルのバージョン
+ * 指定したDBに接続して、全データを取得します。
+ * @param {string} dbName
+ * @param {string} tabelName
  */
-var getAllValue = function(dbName, tableName, dbver){
+var getAllValue = function(dbName, tableName){
 	// DBに接続
-  var version = dbver;
 	var dbRequest = indexedDB.open(dbName);
 
   dbRequest.onsuccess = function(event){
@@ -181,36 +178,33 @@ var getAllValue = function(dbName, tableName, dbver){
     db.close();
   }
 	dbRequest.onerror = function(event){
-	    console.log('DBの接続に失敗しました。');
+    console.log('DBの接続に失敗しました。');
 	}
 }
 
 /**
- * 
+ * HealthScoringMasterDBのセットアップ
  */
-var Load = function(){
+var IndexedDBSetup = function(){
   // 健康スコアリング_マスタ_データベース
   var dbname = "HealthScoringMasterDB";
   var dbversion = 1;
-
   // 健康変数マスタ・テーブル
   var tableName = "HealthMaster";
   var key = 'HealthNo';
 
-  DebugAlert('TestTom');
-
-  // セッティング・既存のDBを削除（テスト）
+  // テスト：セッティング・既存のDBを削除
   DropDB(dbname);
 
   // データベースの作成
   if(CreateDB(dbname, dbversion)==-1){
-    alert("DBの作成に失敗しました!!");
+    DebugAlert("DBの作成に失敗しました!!");
     return ;
   };
 
   // テーブルの作成
   if(CreateTable(dbname, Number(dbversion) + 1, tableName, key)==-1){
-    alert("テーブルの作成に失敗しました!!");
+    DebugAlert("テーブルの作成に失敗しました!!");
     return ;
   };
 
@@ -245,19 +239,6 @@ var Load = function(){
   Insert(dbname, tableName, HM_Rec2);
   Insert(dbname, tableName, HM_Rec3);
 
-  // TODO:暫定・レコードから読み込んでマスタにセットするよう変更する
-  var arrHelthMaster = [
-    {HealthNo : 1, HealthName:'睡眠'},
-    {HealthNo : 2, HealthName:'飲酒'},
-    {HealthNo : 3, HealthName:'喫煙本数'}
-  ];
-
-  for(var i=0;i<arrHelthMaster.length;i++){
-    let op = document.createElement("option");
-    op.value = arrHelthMaster[i].HealthNo;     //value値
-    op.text = arrHelthMaster[i].HealthName;    //テキスト値
-    document.getElementById("HealthSetting").appendChild(op);
-  }
 }
 
 /**
@@ -270,7 +251,7 @@ function EntryDate(){
   }
 
   // 健康データ登録
-  alert("HealthNo:" + document.getElementById( "HealthNo1" ).value );
+  DebugAlert("HealthNo:" + document.getElementById( "HealthNo1" ).value );
 
   return true;
 }

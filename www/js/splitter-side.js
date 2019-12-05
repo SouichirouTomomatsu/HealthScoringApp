@@ -19,7 +19,6 @@ window.fn.load = function(page) {
 document.addEventListener('init', function(event) {
 
   var page = event.target;
- 
   switch (page.id){
     case 'InputData':
       // InputDataがロードされた時に実行されるプログラム
@@ -31,13 +30,17 @@ document.addEventListener('init', function(event) {
       document.getElementById("SelectDate").value = yyyy+"-"+mm+"-"+dd;
       break;
 
+    case 'setting':
+      // scoringがロードされた時に実行されるプログラム
+      Load();
+      break;
+
     case 'scoring':
       // scoringがロードされた時に実行されるプログラム
-      alert("テスト");
       break;
 
     case 'home':
-      // homeがロードされた時に実行されるプログラム    
+      // homeがロードされた時に実行されるプログラム   
       break;
   }
 });
