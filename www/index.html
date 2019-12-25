@@ -8,19 +8,22 @@
     <!-- コンポーネントローダー (おそらくデフォルトで挿入されていたはず)-->
     <script src="components/loader.js"></script>
     <!-- AngularJS用 -->
-    <script src="lib/angular/angular.min.js"></script>
+    <!-- <script src="lib/angular/angular.min.js"></script> -->
     <!-- OnsenUIの最小限のJS？ -->
-    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    <!-- <script src="lib/onsenui/js/onsenui.min.js"></script> -->
+    <script src="lib/onsenui/js/onsenui.js"></script>
     <!-- Anqular×OnsenUI -->
-    <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
-    <!-- SplitterJS(ナビゲーションメニューの機能) -->
-    <script src="js/splitter-side.js"></script>
-    <!-- ゲームアプリ用JS -->
-    <script src="js/app.js"></script>
-    <!-- IndexedDB -->
-    <script src="js/indexeddb.js"></script>
+    <!-- <script src="lib/onsenui/js/angular-onsenui.min.js"></script> -->
     <!-- 共通部 -->
     <script src="js/Common.js"></script>
+    <!-- IndexedDB -->
+    <script src="js/indexeddb.js"></script>
+    <!-- ShowModal -->
+    <script src="js/ShowModal.js"></script>
+    <!-- ChangeForm -->
+    <script src="js/ChangeForm.js"></script>
+    <!-- SplitterJS(ナビゲーションメニューの機能) -->
+    <script src="js/splitter-side.js"></script>
 
     <!-- OnsenUI import -->
     <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
@@ -43,7 +46,6 @@
     </script>
   </head>
   <body>
-
     <!-- SplitterMenu設定 -->
     <ons-splitter>
       <!-- メニュー設定 -->
@@ -60,11 +62,8 @@
             <ons-list-item onclick="fn.load('InputData.html')" tappable>
               InputData
             </ons-list-item>
-            <ons-list-item onclick="fn.load('scoring.html')" tappable>
+            <ons-list-item onclick="fn.load('Scoring.html')" tappable>
               Scoring
-            </ons-list-item>
-            <ons-list-item onclick="fn.load('conTest.html')" tappable>
-              ConcentrationTest
             </ons-list-item>
             <ons-list-item onclick="fn.load('settings.html')" tappable>
               Settings
@@ -93,7 +92,12 @@
           </div>
         </ons-toolbar>
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-          マスター、ようこそ！
+          こんにちは　マスター！
+          <br>
+          <br>
+          調子はどうですか？<br>          
+          今日も健康に意識し、<br>
+          張り切っていきましょう！
         </p>
       </ons-page>
     </ons-template>
@@ -111,23 +115,57 @@
             InputData
           </div>
         </ons-toolbar>
-        <br>
-        <br>
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
           日付：<input id="SelectDate" type="date" name="SelectDate" style="text-align:center;"><br>
           <br>
-          睡眠時間：<input id="HealthNo1" type="text" ><br>
-          飲酒：    <input id="HealthNo2" type="text" ><br>
-          喫煙：    <input id="HealthNo3" type="text" ><br>
+          温度(℃)：<br>             
+          <ons-input id="HealthNo1" type="text" ><br>
+          湿度（％）：<br>
+          <input id="HealthNo2" type="text" ><br>
+          降水量（mm）：<br>
+          <input id="HealthNo3" type="text" ><br>
+          勤務時間（時間）：<br>
+          <input id="HealthNo4" type="text" ><br>
+          座りっぱなし回数(1時間でカウント1)：<br>
+          <input id="HealthNo5" type="text" ><br>
+          入浴時間（時間） ：<br>
+          <input id="HealthNo6" type="text" ><br>
+          睡眠時間（時間）：<br>
+          <input id="HealthNo7" type="text" ><br>
+          歩数：<br>
+          <input id="HealthNo8" type="text" ><br>
+          スマホ操作時間（時間）：<br>
+          <input id="HealthNo9" type="text" ><br>
+          アルコール飲酒量：<br>
+          <input id="HealthNo10" type="text" ><br>
+          間食：<br>
+          <input id="HealthNo11" type="text" ><br>
+          運動量：<br>
+          <input id="HealthNo12" type="text" ><br>
+          自由時間：<br>
+          <input id="HealthNo13" type="text" ><br>
+          体調不良の有無：<br>
+          <input id="HealthNo14" type="text" ><br>
+          仮眠時間：<br>
+          <input id="HealthNo15" type="text" ><br>
+          気分：<br>
+          <input id="HealthNo17" type="text" ><br>
           <!-- onClickイベントを追加 -->
+          <br>
+          <br>
           <input type="submit" value="登録" onClick="return EntryDate();return EntryDate();">
+          <br>
+          <div style="text-align:center;" left:50px;> 
+            <img src="img/Export.png">
+            <img src="img/Import.png">
+          </div>
         </p>
       </ons-page>
     </ons-template>
 
     <!-- スコアリング画面 -->
-    <ons-template id="scoring.html">
-      <ons-page id="scoring">
+    <ons-template id="Scoring.html">
+      <ons-page id="Scoring">
         <!-- Toolbar -->
         <ons-toolbar>
           <div class="left">
@@ -139,27 +177,23 @@
             ScoringResult!
           </div>
         </ons-toolbar>
-        <!-- Main -->        
+        
+        <!-- Main -->
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
             TODO : ここで健康スコアを算出する。<br>結果も表示する
         </p>
-        <div style="text-align:center;"> 
-          <img src="img/Score_A.png">
-        </div>
-        <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #FF0000;">
-          マスター！
-          良スコアです。<br>
-        </P>
-        <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #000000;">
-          引き続き、集中力を保てるよう<br>
-          健康に気をつけましょう！
+        <p style="text-align: center">
+          <ons-button onclick="showModal()">スコアリングする</ons-button>
         </p>
+        <ons-button id="push-button">Push page</ons-button>
       </ons-page>
     </ons-template>
 
-    <!-- 集中力計測画面 -->
-    <ons-template id="conTest.html">
-      <ons-page>
+    
+    <!-- スコアリング結果画面 -->
+    <ons-template id="ScoringResult.html">
+      <ons-page id="ScoringResult">
+        <!-- Toolbar -->
         <ons-toolbar>
           <div class="left">
             <ons-toolbar-button onclick="fn.open()">
@@ -167,19 +201,31 @@
             </ons-toolbar-button>
           </div>
           <div class="center">
-            集中力測定ゲーム
+            ScoringResult!
           </div>
         </ons-toolbar>
+        <!-- Main -->
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-          集中力計測開始しまっせ！！
+            TODO : ここで健康スコアを算出する。<br>結果も表示する
         </p>
-        <ons-navigator var="myNavigator" page="top.html">
-        </ons-navigator>  
-        <!-- <div class="start-btn" ng-controller="gameCtrl as top">
-          <ons-button modifier="large" ng-click="top.gameStart()">
-            Game Start
-          </ons-button>
-        </div> -->
+        <p style="text-align: center">
+          <ons-button onclick="showModal()">再スコアリングする</ons-button>
+        </p>
+        <div style="text-align:center;"> 
+          <img src="img/Score_A.png">
+        </div>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #FF0000;">
+          マスター！
+          良スコアです。
+        </P>
+        <br>
+        <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #000000;">
+          引き続き、集中力を保てるよう<br>
+          健康に気をつけましょう！
+        </p>
+        <p style="text-align: center">
+          <ons-button onclick="showModal()">エクスポート</ons-button>
+        </p>
       </ons-page>
     </ons-template>
     
@@ -197,18 +243,26 @@
             Settings
           </div>
         </ons-toolbar>
-        <br><br>
         <!-- Main -->
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">          
           <br>
           TODO : ここに健康変数マスタを設定する項目を設ける
-          <br>
-          <br>
-          <input type="button" value="セット" onClick="Load()" >
-          <br>
-          <br>
-          <select id="HealthSetting" ,name="HealthMaster">
-          </select>    
+          <br><br>
+          <select id="HealthSetting" ,name="HealthMaster"></select>
+          <p style="text-align: center; opacity: 0.6;">
+            重み：<br>
+            <input id="HealthWeight" type="text" value="3.14159" >
+            <br><br>
+            プライベート設定：<br>
+            <input type="radio" name="IsPrivate" value="YES" > はい
+            <input type="radio" name="IsPrivate" value="NO" checked> いいえ
+            <br><br>
+            影響日：<br>
+            <input type="radio" name="InpactDate" value="yesterday" > 前日
+            <input type="radio" name="InpactDate" value="Today" checked> 当日
+            <input type="radio" name="InpactDate" value="Tommorow" > 翌日
+            <br><br>
+          </p>
         </p> 
       </ons-page>
     </ons-template>
@@ -231,6 +285,14 @@
         </p>
       </ons-page>
     </ons-template>
+    
+    <ons-modal direction="up">
+      <div style="text-align: center">
+        <p>
+          <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+        </p>
+      </div>
+    </ons-modal>
 
   </body>
 </html>

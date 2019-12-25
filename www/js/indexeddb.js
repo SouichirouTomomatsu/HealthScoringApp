@@ -211,7 +211,7 @@ var IndexedDBSetup = function(){
   // 健康変数マスタ・レコードの用意
   var HM_Rec1 = {
     HealthNo : 1,
-    HealthName : '睡眠時間',
+    HealthName : '温度',
     HealthWeight : 30,
     InputFormat : 1,
     IsPrivate : "True",
@@ -219,7 +219,7 @@ var IndexedDBSetup = function(){
   };
   var HM_Rec2 = {
     HealthNo : 2,
-    HealthName : '飲酒',
+    HealthName : '湿度',
     HealthWeight : 30,
     InputFormat : 1,
     IsPrivate : "",
@@ -227,7 +227,63 @@ var IndexedDBSetup = function(){
   };
   var HM_Rec3 = {
     HealthNo : 3,
-    HealthName : '喫煙本数',
+    HealthName : '降水量',
+    HealthWeight : 30,
+    InputFormat : 1,
+    IsPrivate : "",
+    ImpactDate : 0,
+  };
+  var HM_Rec4 = {
+    HealthNo : 4,
+    HealthName : '勤務時間',
+    HealthWeight : 30,
+    InputFormat : 1,
+    IsPrivate : "",
+    ImpactDate : 0,
+  };
+  var HM_Rec5 = {
+    HealthNo : 5,
+    HealthName : '座りっぱなし回数',
+    HealthWeight : 30,
+    InputFormat : 1,
+    IsPrivate : "",
+    ImpactDate : 0,
+  };
+  var HM_Rec6 = {
+    HealthNo : 6,
+    HealthName : '入浴時間',
+    HealthWeight : 30,
+    InputFormat : 1,
+    IsPrivate : "",
+    ImpactDate : 0,
+  };
+  var HM_Rec7 = {
+    HealthNo : 7,
+    HealthName : '睡眠時間',
+    HealthWeight : 30,
+    InputFormat : 1,
+    IsPrivate : "",
+    ImpactDate : 0,
+  };
+  var HM_Rec8 = {
+    HealthNo : 8,
+    HealthName : '歩数',
+    HealthWeight : 30,
+    InputFormat : 1,
+    IsPrivate : "",
+    ImpactDate : 0,
+  };
+  var HM_Rec9 = {
+    HealthNo : 9,
+    HealthName : 'スマホ操作時間',
+    HealthWeight : 30,
+    InputFormat : 1,
+    IsPrivate : "",
+    ImpactDate : 0,
+  };
+  var HM_Rec10 = {
+    HealthNo : 10,
+    HealthName : 'アルコール飲酒量',
     HealthWeight : 30,
     InputFormat : 1,
     IsPrivate : "",
@@ -238,6 +294,13 @@ var IndexedDBSetup = function(){
   Insert(dbname, tableName, HM_Rec1);
   Insert(dbname, tableName, HM_Rec2);
   Insert(dbname, tableName, HM_Rec3);
+  Insert(dbname, tableName, HM_Rec4);
+  Insert(dbname, tableName, HM_Rec5);
+  Insert(dbname, tableName, HM_Rec6);
+  Insert(dbname, tableName, HM_Rec7);
+  Insert(dbname, tableName, HM_Rec8);
+  Insert(dbname, tableName, HM_Rec9);
+  Insert(dbname, tableName, HM_Rec10);
 
 }
 
