@@ -7,4 +7,6 @@ function showModal() {
   setTimeout(function() {
     modal.hide();
   }, 2000);
+  
+  fn.load('ScoringResult.html');
 }

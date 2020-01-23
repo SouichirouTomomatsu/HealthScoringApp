@@ -91,7 +91,7 @@
             Main
           </div>
         </ons-toolbar>
-        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+        <p style="text-align: center; opacity: 0.6; padding-top: 75px;">
           こんにちは　マスター！
           <br>
           <br>
@@ -116,40 +116,64 @@
           </div>
         </ons-toolbar>
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-          日付：<input id="SelectDate" type="date" name="SelectDate" style="text-align:center;"><br>
-          <br>
+          日付：<input id="SelectDate" type="date" name="SelectDate" style="text-align:center;">
+          <br><br>
           温度(℃)：<br>             
-          <ons-input id="HealthNo1" type="text" ><br>
+          <ons-input id="HealthNo1" modifier="underbar" placeholder="温度(℃)" float></ons-input>
+          <br><br>
           湿度（％）：<br>
-          <input id="HealthNo2" type="text" ><br>
+          <ons-input id="HealthNo2" modifier="underbar" placeholder="湿度（％）" float ></ons-input>
+          <br><br>
           降水量（mm）：<br>
-          <input id="HealthNo3" type="text" ><br>
+          <ons-input id="HealthNo3" modifier="underbar" placeholder="降水量（mm）" float ></ons-input>
+          <br><br>
           勤務時間（時間）：<br>
-          <input id="HealthNo4" type="text" ><br>
-          座りっぱなし回数(1時間でカウント1)：<br>
-          <input id="HealthNo5" type="text" ><br>
+          <ons-input id="HealthNo4" modifier="underbar" placeholder="勤務時間（時間）" float ></ons-input>
+          <br><br>
+          座りっぱなし回数(1時間でカウント1)：
+          <ons-input id="HealthNo5" modifier="underbar" placeholder="座りっぱなし回数(1時間でカウント1)" float ></ons-input>
+          <br><br>
           入浴時間（時間） ：<br>
-          <input id="HealthNo6" type="text" ><br>
+          <ons-input id="HealthNo6" modifier="underbar" placeholder="入浴時間（時間） " float ></ons-input>
+          <br><br>
           睡眠時間（時間）：<br>
-          <input id="HealthNo7" type="text" ><br>
+          <ons-input id="HealthNo7" modifier="underbar" placeholder="睡眠時間（時間） " float></ons-input>
+          <br><br>
           歩数：<br>
-          <input id="HealthNo8" type="text" ><br>
+          <ons-input id="HealthNo8" modifier="underbar" placeholder="歩数 " float
+          ></ons-input>
+          <br><br>
           スマホ操作時間（時間）：<br>
-          <input id="HealthNo9" type="text" ><br>
+          <ons-input id="HealthNo9" modifier="underbar" placeholder="スマホ操作時間（時間） " float
+          ></ons-input>
+          <br><br>
           アルコール飲酒量：<br>
-          <input id="HealthNo10" type="text" ><br>
+          <ons-input id="HealthNo10" modifier="underbar" placeholder="アルコール飲酒量 " float
+          ></ons-input>
+          <br><br>
           間食：<br>
-          <input id="HealthNo11" type="text" ><br>
+          <ons-input id="HealthNo11" modifier="underbar" placeholder="間食 " float
+          ></ons-input>
+          <br><br>
           運動量：<br>
-          <input id="HealthNo12" type="text" ><br>
+          <ons-input id="HealthNo12" modifier="underbar" placeholder="運動量 " float
+          ></ons-input>
+          <br><br>
           自由時間：<br>
-          <input id="HealthNo13" type="text" ><br>
+          <ons-input id="HealthNo13" modifier="underbar" placeholder="自由時間 " float
+          ></ons-input>
+          <br><br>
           体調不良の有無：<br>
-          <input id="HealthNo14" type="text" ><br>
+          <ons-input id="HealthNo14" modifier="underbar" placeholder="体調不良の有無 " float
+          ></ons-input>
+          <br><br>
           仮眠時間：<br>
-          <input id="HealthNo15" type="text" ><br>
+          <ons-input id="HealthNo15" modifier="underbar" placeholder="仮眠時間 " float
+          ></ons-input>
+          <br><br>
           気分：<br>
-          <input id="HealthNo17" type="text" ><br>
+          <ons-input id="HealthNo17" modifier="underbar" placeholder="気分 " float
+          ></ons-input><br><br>
           <!-- onClickイベントを追加 -->
           <br>
           <br>
@@ -179,16 +203,13 @@
         </ons-toolbar>
         
         <!-- Main -->
-        <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-            TODO : ここで健康スコアを算出する。<br>結果も表示する
+        <p style="text-align: center; opacity: 0.6; padding-top: 150px;">
+            TODO : ここで健康スコアを算出する。<br>
         </p>
         <p style="text-align: center">
           <ons-button onclick="showModal()">スコアリングする</ons-button>
         </p>
-        <ons-button id="push-button">Push page</ons-button>
-      </ons-page>
     </ons-template>
-
     
     <!-- スコアリング結果画面 -->
     <ons-template id="ScoringResult.html">
