@@ -119,32 +119,32 @@
           日付：<input id="SelectDate" type="date" name="SelectDate" style="text-align:center;">
           <br><br>
           温度(℃)：<br>             
-          <ons-input id="HealthNo1" modifier="underbar" placeholder="温度(℃)" float></ons-input>
+          <ons-input id="HealthNo1" modifier="underbar" placeholder="（単位：℃)" float></ons-input>
           <br><br>
           湿度（％）：<br>
-          <ons-input id="HealthNo2" modifier="underbar" placeholder="湿度（％）" float ></ons-input>
+          <ons-input id="HealthNo2" modifier="underbar" placeholder="（単位：％）" float ></ons-input>
           <br><br>
           降水量（mm）：<br>
-          <ons-input id="HealthNo3" modifier="underbar" placeholder="降水量（mm）" float ></ons-input>
+          <ons-input id="HealthNo3" modifier="underbar" placeholder="（単位：mm）" float ></ons-input>
           <br><br>
           勤務時間（時間）：<br>
-          <ons-input id="HealthNo4" modifier="underbar" placeholder="勤務時間（時間）" float ></ons-input>
+          <ons-input id="HealthNo4" modifier="underbar" placeholder="（単位：時間）" float ></ons-input>
           <br><br>
           座りっぱなし回数(1時間でカウント1)：
-          <ons-input id="HealthNo5" modifier="underbar" placeholder="座りっぱなし回数(1時間でカウント1)" float ></ons-input>
+          <ons-input id="HealthNo5" modifier="underbar" placeholder="(1時間でカウント1)" float ></ons-input>
           <br><br>
           入浴時間（時間） ：<br>
-          <ons-input id="HealthNo6" modifier="underbar" placeholder="入浴時間（時間） " float ></ons-input>
+          <ons-input id="HealthNo6" modifier="underbar" placeholder="（単位：時間） " float ></ons-input>
           <br><br>
           睡眠時間（時間）：<br>
-          <ons-input id="HealthNo7" modifier="underbar" placeholder="睡眠時間（時間） " float></ons-input>
+          <ons-input id="HealthNo7" modifier="underbar" placeholder="（単位：時間） " float></ons-input>
           <br><br>
           歩数：<br>
           <ons-input id="HealthNo8" modifier="underbar" placeholder="歩数 " float
           ></ons-input>
           <br><br>
           スマホ操作時間（時間）：<br>
-          <ons-input id="HealthNo9" modifier="underbar" placeholder="スマホ操作時間（時間） " float
+          <ons-input id="HealthNo9" modifier="underbar" placeholder="（単位：時間） " float
           ></ons-input>
           <br><br>
           アルコール飲酒量：<br>
@@ -152,7 +152,7 @@
           ></ons-input>
           <br><br>
           間食：<br>
-          <ons-input id="HealthNo11" modifier="underbar" placeholder="間食 " float
+          <ons-input id="HealthNo11" modifier="underbar" placeholder="（単位：回数） " float
           ></ons-input>
           <br><br>
           運動量：<br>
@@ -160,7 +160,7 @@
           ></ons-input>
           <br><br>
           自由時間：<br>
-          <ons-input id="HealthNo13" modifier="underbar" placeholder="自由時間 " float
+          <ons-input id="HealthNo13" modifier="underbar" placeholder="（単位：時間）" float
           ></ons-input>
           <br><br>
           体調不良の有無：<br>
@@ -227,22 +227,25 @@
         </ons-toolbar>
         <!-- Main -->
         <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-            TODO : ここで健康スコアを算出する。<br>結果も表示する
+            <!-- TODO : ここで健康スコアを算出する。<br>結果も表示する -->
         </p>
         <p style="text-align: center">
           <ons-button onclick="showModal()">再スコアリングする</ons-button>
         </p>
         <div style="text-align:center;"> 
-          <img src="img/Score_A.png">
+          <img src="img/Score_91.png" width="100%" height="100%">
         </div>
         <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #FF0000;">
-          マスター！
-          良スコアです。
+          マスター！とても良スコアです。
         </P>
-        <br>
         <p style="text-align: center; opacity: 0.6; padding-top: 20px; color : #000000;">
           引き続き、集中力を保てるよう<br>
-          健康に気をつけましょう！
+          健康に気をつけましょう！<br>
+          <br>
+          あれ？間食が多いみたいですね。。。<br>
+          少し減らしてみてはいかがです？
+          <br>
+          <br>
         </p>
         <p style="text-align: center">
           <ons-button onclick="showModal()">エクスポート</ons-button>
