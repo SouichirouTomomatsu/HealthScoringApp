@@ -17,8 +17,8 @@ window.fn.load = function(page) {
  * ナビゲーションメニュー遷移時のロードイベント
  */
 document.addEventListener('init', function(event) {
-
   var page = event.target;
+  
   switch (page.id){
     case 'InputData':
       // InputDataがロードされた時に実行されるプログラム

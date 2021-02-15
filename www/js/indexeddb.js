@@ -1,12 +1,14 @@
 /**
- * TODO:IndexedDB_Common.jsに後程命名する。
+ *  IndexedDBの管理を行います。 
+ *  DB作成は1つしか認めません。←ダメでしょ
  */
 var hogehoge = 'ver 1.000.000';
 
 /**
- * データベースの新規作成
- * @param {string} dbName     : 新規作成するデータベース名
- * @param {string} dbver      : DBのバージョン
+ * 指定したDBに接続します。
+ * 存在しなければ新規作成を行います。
+ * @param {string} dbName   接続するDB名
+ * @param {string} dbVer    DBバージョン
  */
 var CreateDB = function(dbName, dbVer){
 	// DBに接続
@@ -24,11 +26,12 @@ var CreateDB = function(dbName, dbVer){
 }
 
 /**
- * テーブルの新規作成
- * @param {string} dbName     : データベース名
- * @param {string} dbVer      : DBのバージョン
- * @param {string} tableName  : 新規作成するテーブル名
- * @param {string} key        : 主キーを指定
+ * 指定したDBにTableを作成します。
+ * 存在しなければ新規作成を行います。
+ * @param {string} dbName     接続するDB名
+ * @param {string} dbVer      DBバージョン
+ * @param {string} tableName  テーブル名
+ * @param {srring} key        キーの設定
  */
 var CreateTable = function(dbName, dbVer, tableName, key){
   // 入力チェック
@@ -36,6 +39,8 @@ var CreateTable = function(dbName, dbVer, tableName, key){
     DebugAlert('テーブル名に空白文字は無効です');
     return -2;
   }
+
+  // テーブルの作成
 	var dbRequest = indexedDB.open(dbName,dbVer);
   dbRequest.onupgradeneeded = function(event){
     // DBのバージョン変更が発生した場合実行
@@ -61,8 +66,8 @@ var CreateTable = function(dbName, dbVer, tableName, key){
 }
 
 /**
- * テーブルの削除
- * @param {string} dbName     :DBの名前
+ * 指定したDBを削除します。
+ * @param {string} dbName       削除するDB名
  */
 var DropDB = function(dbName){
   var deleteReq = indexedDB.deleteDatabase(dbName);
@@ -78,10 +83,10 @@ var DropDB = function(dbName){
 }
 
 /**
- * レコードの挿入
- * @param {string} dbName     : データベース名
- * @param {string} tableName  : テーブル名
- * @param {string} date       : 挿入するデータを指定
+ * 指定したDBのTableにレコードを挿入します。
+ * @param {string} dbName       接続するDB名
+ * @param {string} tableName    DBバージョン
+ * @param {string} data         挿入するレコード内容 
  */
 var Insert = function(dbName, tableName, data){
 	// DBに接続
@@ -103,6 +108,34 @@ var Insert = function(dbName, tableName, data){
 	}
   // 正常終了
   return 0;  
+}
+
+/**
+ * 指定したDBのTableにレコードを更新します。
+ * @param {string} dbName       接続するDB名
+ * @param {string} tableName    DBバージョン
+ * @param {string} data         挿入するレコード内容 
+ */
+var Update = function(dbName, tableName, data){
+	// DBに接続
+
+  return -1;
+
+	var dbRequest = indexedDB.open(dbName);
+  dbRequest.onsuccess = function(event){
+    var db = event.target.result;
+    // テーブルが読み書き可能であることを宣言している。
+    var trans = db.transaction(tableName, 'readwrite');
+    var table = trans.objectStore(tableName);
+
+    // テーブルにデータを追加
+    var putRequest = table.put(data);
+    alert("データを挿入しました");
+    db.close();
+	}
+	dbRequest.onerror = function(event){
+    alert('DBの接続に失敗しました。');
+	}
 }
 
 /**
@@ -146,7 +179,8 @@ var getValue = function(dbName, tableName, id){
 }
 
 /**
- * 指定したDBに接続して、全データを取得します。
+ * 指定したDBに接続して、データを取得します。
+ * 指定したキーに紐づくデータを取得します。
  * @param {string} dbName
  * @param {string} tabelName
  */
@@ -178,7 +212,7 @@ var getAllValue = function(dbName, tableName){
     db.close();
   }
 	dbRequest.onerror = function(event){
-    console.log('DBの接続に失敗しました。');
+	    console.log('DBの接続に失敗しました。');
 	}
 }
 

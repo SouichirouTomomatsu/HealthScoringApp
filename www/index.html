@@ -43,6 +43,13 @@
         document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
         document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
       }
+
+      // Loadイベント
+      index_Load();
+
+      // テスト環境用　DB
+      var test_dbname = "TestMasterDB";
+
     </script>
   </head>
   <body>
@@ -67,6 +74,9 @@
             </ons-list-item>
             <ons-list-item onclick="fn.load('settings.html')" tappable>
               Settings
+            </ons-list-item>
+            <ons-list-item onclick="fn.load('DBTest.html')" tappable>
+              DBTest
             </ons-list-item>
             <ons-list-item onclick="fn.load('about.html')" tappable>
               About
@@ -291,6 +301,46 @@
       </ons-page>
     </ons-template>
 
+    <!-- DBテスト画面 -->
+    <ons-template id="DBTest.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            DB - TEST
+          </div>
+        </ons-toolbar>
+
+        <br />
+          IndexedDBのTOMテストサンプル
+        <br /><br />
+        <input type="button" value="ＤＢ作成" onClick="CreateDB(test_dbname, dbversion)">
+        <br /><br /> 
+        <input type="button" value="テーブル作成1" onClick="CreateTable(test_dbname, Number(dbversion) + 1, tablename, key)">
+        <br /><br /> 
+        <input type="button" value="テーブル作成2" onClick="CreateTable(test_dbname, Number(dbversion) + 1, 'TestTable1', key)">
+        <br /><br /> 
+        <input type="button" value="データ挿入1" onClick="Insert(test_dbname, tablename, HM_Recd1)">
+        <input type="button" value="データ挿入2" onClick="Insert(test_dbname, tablename, HM_Recd2)">
+        <input type="button" value="データ挿入3" onClick="Insert(test_dbname, tablename, HM_Recd3)">
+        <br /><br />
+        <!-- <input type="button" value="まとめてデータ挿入" onClick="Insert(test_dbname, tablename, HM_Rec)"> -->
+        <br /><br />
+        <input type="button" value="削除" onClick="DropDB(test_dbname)">
+        <br /><br />
+        <input type="button" value="データ取得" onClick="getValue(test_dbname, tablename, id_data)">
+        <br /><br />
+        <input type="button" value="データ全取得" onClick="getAllValue(test_dbname, tablename, dbversion)">
+        <br /><br /><br />
+        <input type="button" value="テスト" onClick="TestDo()">
+        <br /><br /><br />
+      </ons-page>
+    </ons-template>
+    
     <!-- クレジット画面 -->
     <ons-template id="about.html">
       <ons-page>
@@ -310,6 +360,8 @@
       </ons-page>
     </ons-template>
     
+    <!-- Private Method -->
+    <!-- 画面をマスク化（スコアリング時に使用） -->
     <ons-modal direction="up">
       <div style="text-align: center">
         <p>
